@@ -2,8 +2,10 @@ const express = require('express');
 const {PORT} = require('./src/config/serverConfig')
 const connect = require('./src/config/database');
 const User = require('./src/models/user');
+const cors = require('cors');
 const app = express();
 app.use(express.json());
+app.use(cors());
 const route = express.Router();
 app.route('/signup').post( async(req,res)=>{
     try {
