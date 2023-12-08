@@ -1,5 +1,5 @@
 const UserService = require('../services/user-service');
-
+const {StatusCodes} = require('http-status-codes')
 const userService = new UserService();
 
 const signUp = async (req,res)=>{
@@ -10,18 +10,18 @@ const signUp = async (req,res)=>{
         mobile: req.body.mobile,
         password: req.body.password
     });
-    return res.status(201).json({
+    return res.status(StatusCodes.OK).json({
         success:true,
         message:"Successfully created the user",
         data:response,
         err:{}
     })
 }   catch(error){
-    return res.status(201).json({
-        success:true,
-        message:"Somthing went wrong try again",
+    return res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
+        success:false,
+        message:error.message,
         data:{},
-        err:error
+        err:error.explanation
     })}
 }
 module.exports ={

@@ -1,6 +1,8 @@
 const UserRepository = require('../repository/user-repository');
 const jwt = require('jsonwebtoken')
-const {JWT_KEY} = require('../config/serverConfig')
+const {JWT_KEY} = require('../config/serverConfig');
+const { json } = require('body-parser');
+const ServiceError = require('../Errors/service-errors')
 class UserService{
     constructor(){
         this.userRepository = new UserRepository();
@@ -10,14 +12,13 @@ class UserService{
         try {
             const existingUser = await this.userRepository.get(data.email);
             if(existingUser){
-                throw{error:"User with this email already exists"};
+                throw new ServiceError('User already exist','Somthing went wrong in user creation');
             }
             const user = await this.userRepository.create(data);
             const token = await this.createToken(data.email,data.name);
-            console.log("here is token",token);
             return [user,{"token":token}];
         } catch (error) {
-            console.log("Somthing went wrong in the service layer");
+            console.log("Somthing went wrong in the service layer",error);
             throw error;
         }
     }
