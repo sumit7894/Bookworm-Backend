@@ -16,9 +16,7 @@ class UserRepository{
     }
     async get(emailId){
         try {
-            
             const user = await User.findOne({email:emailId});
-            console.log(user);
             return user;
         } catch (error) {
             console.log("Somthing went wrong in the repo layer");

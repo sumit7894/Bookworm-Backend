@@ -24,6 +24,29 @@ const signUp = async (req,res)=>{
         err:error.explanation
     })}
 }
+const login = async (req,res) =>{
+    try {
+        const response = await userService.login({
+            email: req.body.email,
+            password:req.body.password
+        })
+        return res.status(StatusCodes.OK).json({
+            success:true,
+            message:"Successfully Logged In",
+            token:response,
+            err:{}
+        })
+    } catch (error) {
+        console.log("got error");
+        return res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
+            success:false,
+            message:error.message,
+            data:{},
+            err:error.explanation
+        })
+    }
+}
 module.exports ={
-    signUp
+    signUp,
+    login
 }
