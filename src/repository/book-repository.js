@@ -14,7 +14,7 @@ class BookRepository
     }
     async get(){
         try {
-            const book = await Book.findOne();
+            const book = await Book.find();
             return book;
         } catch (error) {
             console.log("Somthing went wrong in the repo layer")
