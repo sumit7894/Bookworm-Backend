@@ -4,8 +4,9 @@ const bookService = new BookService();
 
 const create = async(req,res)=>{
     try {
+        console.log("here is response",req.body);
         const response = await bookService.create({
-            name:req.body.name,
+            BookName:req.body.name,
             logo:req.body.logo,
             description:req.body.description,
             tags:req.body.tags,

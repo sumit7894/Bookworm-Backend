@@ -5,7 +5,7 @@ class BookService{
         this.bookRepository = new BookRepository();
     }
 
-    async create(){
+    async create(data){
         try {
             const book = await this.bookRepository.create(data);
             return book;
