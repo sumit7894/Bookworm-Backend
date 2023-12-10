@@ -4,7 +4,6 @@ const bookService = new BookService();
 
 const create = async(req,res)=>{
     try {
-        console.log("here is response",req.body);
         const response = await bookService.create({
             BookName:req.body.name,
             logo:req.body.logo,
@@ -27,6 +26,25 @@ const create = async(req,res)=>{
         })
     }
 }
+const getAllBooks = async(req,res)=>{
+    try {
+        const response = await bookService.getAllBooks();
+        return res.status(StatusCodes.OK).json({
+            success:true,
+            message:"Fetched all the users",
+            data:response,
+            err:{}
+        })
+    } catch (error) {
+        return res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
+            success:true,
+            message:error.message,
+            data:{},
+            err:error
+        })
+    }
+}
 module.exports = {
-    create
+    create,
+    getAllBooks
 }

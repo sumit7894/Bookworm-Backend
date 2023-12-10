@@ -14,6 +14,16 @@ class BookService{
             throw error;
         }
     }
+
+    async getAllBooks(){
+        try {
+            const book = await this.bookRepository.get();
+            return book;
+        } catch (error) {
+            console.log(error);
+            throw error;
+        }
+    }
 }
 
 module.exports = BookService;
