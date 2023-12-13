@@ -5,6 +5,9 @@ class BookRepository
     async create(data)
     {
         try {
+            const {tags} = data;
+            const commaSeprated = tags.split(/[,]+/);
+            data.tags = commaSeprated;
             const book = await Book.create(data);
             return book;
         } catch (error) {
