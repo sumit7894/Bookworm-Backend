@@ -1,3 +1,4 @@
+const { default: mongoose } = require('mongoose');
 const BookService = require('../services/book-service');
 const {StatusCodes} = require('http-status-codes');
 const bookService = new BookService();
@@ -44,7 +45,30 @@ const getAllBooks = async(req,res)=>{
         })
     }
 }
+const upvote = async(req,res)=>{
+    try {
+        console.log("here is id",req.body);
+        const response = await bookService.upvote({
+            _id:req.body._id
+        });
+        return res.status(StatusCodes.OK).json({
+            succes:true,
+            message:"Successfully done upvote",
+            data:response.upvotes,
+            err:{}
+        })
+    } catch (error) {
+        console.log(error);
+        return res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
+            success:true,
+            message:error.message,
+            data:{},
+            err:error
+        })
+    }
+}
 module.exports = {
     create,
-    getAllBooks
+    getAllBooks,
+    upvote
 }

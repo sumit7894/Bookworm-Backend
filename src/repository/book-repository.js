@@ -24,5 +24,18 @@ class BookRepository
             throw error;
         }
     }
+    async upvote(bookId){
+        try {
+            const updatedUpvote = await Book.findByIdAndUpdate(
+                bookId,
+                {$inc:{upvotes:1}},
+                {new:true}
+            );
+            return updatedUpvote;
+        } catch (error) {
+            console.log("Somthing went wrong in repo layer");
+            throw error;
+        }
+    }
 }
 module.exports = BookRepository;

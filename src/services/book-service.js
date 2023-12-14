@@ -24,6 +24,15 @@ class BookService{
             throw error;
         }
     }
+    async upvote(bookId){
+        try {
+            const updateUpvote = await this.bookRepository.upvote(bookId);
+            return updateUpvote;
+        } catch (error) {
+            console.log("Somthing went wrong in the repo layer");
+            throw error;
+        }
+    }
 }
 
 module.exports = BookService;
