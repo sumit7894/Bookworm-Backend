@@ -47,7 +47,6 @@ const getAllBooks = async(req,res)=>{
 }
 const upvote = async(req,res)=>{
     try {
-        console.log("here is id",req.body);
         const response = await bookService.upvote({
             _id:req.body._id
         });
@@ -67,8 +66,31 @@ const upvote = async(req,res)=>{
         })
     }
 }
+const addComment = async(req,res)=>{
+    try {
+        const response = await bookService.addComment({
+            id:req.body.id,
+            comment:req.body.comment
+        })
+        return res.status(StatusCodes.OK).json({
+            success:true,
+            message:"Successfully added the comment",
+            data:response,
+            err:{}
+        })
+    } catch (error) {
+        console.log(error);
+        return res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
+            success:true,
+            message:error.message,
+            data:{},
+            err:error
+        })
+    }
+}
 module.exports = {
     create,
     getAllBooks,
-    upvote
+    upvote,
+    addComment
 }

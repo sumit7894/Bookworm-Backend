@@ -33,6 +33,16 @@ class BookService{
             throw error;
         }
     }
+    async addComment(data){
+        console.log(data);
+        try {
+            const comment = await this.bookRepository.addComment(data);
+            return comment;
+        } catch (error) {
+            console.log(error);
+            throw error;
+        }
+    }
 }
 
 module.exports = BookService;

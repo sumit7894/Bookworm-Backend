@@ -1,5 +1,4 @@
 const mongoose = require('mongoose')
-const commentSchema = require('./commentsSchema');
 const bookSchema = new mongoose.Schema({
     BookName:{
         type:String,
@@ -21,7 +20,9 @@ const bookSchema = new mongoose.Schema({
         required:true,
         default: 0,
     },
-    comments:[commentSchema]
+    comments:[{
+        type:String
+    }]
 },{timestamps:true})
 
 const Book = mongoose.model('Book',bookSchema);

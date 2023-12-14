@@ -37,5 +37,15 @@ class BookRepository
             throw error;
         }
     }
+    async addComment(data){
+        try {
+            const book = await Book.findById(data.id);
+            book.comments.push(data.comment);
+            await book.save();
+        } catch (error) {
+            console.log("Somthing went wrong in the repo layer");
+            throw error;
+        }
+    }
 }
 module.exports = BookRepository;
