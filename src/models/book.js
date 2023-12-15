@@ -22,7 +22,11 @@ const bookSchema = new mongoose.Schema({
     },
     comments:[{
         type:String
-    }]
+    }],
+    commentCount:{
+        type:Number,
+        default:0
+    }
 },{timestamps:true})
 
 const Book = mongoose.model('Book',bookSchema);

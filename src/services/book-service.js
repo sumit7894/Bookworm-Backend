@@ -17,6 +17,7 @@ class BookService{
 
     async getAllBooks(){
         try {
+
             const book = await this.bookRepository.get();
             return book;
         } catch (error) {

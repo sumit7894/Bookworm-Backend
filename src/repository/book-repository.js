@@ -17,7 +17,7 @@ class BookRepository
     }
     async get(){
         try {
-            const book = await Book.find();
+            const book = await Book.find().sort({'comments.length': 'desc'}).exec();
             return book;
         } catch (error) {
             console.log("Somthing went wrong in the repo layer")
@@ -41,6 +41,10 @@ class BookRepository
         try {
             const book = await Book.findById(data.id);
             book.comments.push(data.comment);
+            await Book.findByIdAndUpdate(book._id,
+            {$inc:{countComment:1}},
+            {new:true}
+            )
             await book.save();
         } catch (error) {
             console.log("Somthing went wrong in the repo layer");
