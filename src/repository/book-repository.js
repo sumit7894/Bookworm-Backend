@@ -15,9 +15,14 @@ class BookRepository
             throw error;
         }
     }
-    async get(){
+    async get(sortBy,genre){
         try {
-            const book = await Book.find().sort({'commentCount':"desc"});
+            const filter ={};
+            if(genre){
+                filter.tags = {$in: genre};
+            }
+            const book = await Book.find(filter).sort({[sortBy]:-1});
+            
             return book;
         } catch (error) {
             console.log("Somthing went wrong in the repo layer")

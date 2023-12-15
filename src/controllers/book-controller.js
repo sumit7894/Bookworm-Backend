@@ -29,7 +29,7 @@ const create = async(req,res)=>{
 }
 const getAllBooks = async(req,res)=>{
     try {
-        const response = await bookService.getAllBooks();
+        const response = await bookService.getAllBooks(req.query.sortBy,req.query.genre);
         return res.status(StatusCodes.OK).json({
             success:true,
             message:"Fetched all the users",

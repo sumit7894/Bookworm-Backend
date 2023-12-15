@@ -15,10 +15,9 @@ class BookService{
         }
     }
 
-    async getAllBooks(){
+    async getAllBooks(sortBy,genre){
         try {
-
-            const book = await this.bookRepository.get();
+            const book = await this.bookRepository.get(sortBy,genre);
             return book;
         } catch (error) {
             console.log(error);

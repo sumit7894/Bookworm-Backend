@@ -12,7 +12,7 @@ const bookSchema = new mongoose.Schema({
 
     },
     tags:{
-        type:Array,
+        type:[String],
         required:true   
     },
     upvotes:{
