@@ -41,11 +41,12 @@ class BookRepository
         try {
             const book = await Book.findById(data.id);
             book.comments.push(data.comment);
-            await Book.findByIdAndUpdate(book._id,
+            await Book.findByIdAndUpdate(data._id,
             {$inc:{commentCount:1}},
             {new:true}
             )
             await book.save();
+            return book;
         } catch (error) {
             console.log("Somthing went wrong in the repo layer");
             throw error;
