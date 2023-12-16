@@ -22,7 +22,6 @@ class BookRepository
                 filter.tags = {$in: genre};
             }
             const book = await Book.find(filter).sort({[sortBy]:-1});
-            
             return book;
         } catch (error) {
             console.log("Somthing went wrong in the repo layer")
@@ -46,11 +45,12 @@ class BookRepository
         try {
             const book = await Book.findById(data.id);
             book.comments.push(data.comment);
-            await Book.findByIdAndUpdate(data._id,
+            const count = await Book.findByIdAndUpdate(data.id,
             {$inc:{commentCount:1}},
             {new:true}
             )
             await book.save();
+            
             return book;
         } catch (error) {
             console.log("Somthing went wrong in the repo layer");
